@@ -1,0 +1,19 @@
+SN
+TDate
+DraweeBank
+SeqNo
+SerialNo
+SortCode
+TCode
+Amount
+ReceivingAccountNo
+ReceivingName
+PresentingAccountNo
+PresentingAccountName
+TransDetails
+ReturnCode
+
+
+(c) Nigeria Inter-Bank Settlement Systems Plc 2021
+Presenting Bank:					Zenith Bank Plc
+OUTWARD ITEMS DETAIL REPORT

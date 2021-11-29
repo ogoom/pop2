@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="Cherry" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+    <style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+    <style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+    <style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+    <style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+    <style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+        <conditionalStyle>
+            <conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+            <style mode="Opaque" backcolor="#F0EFEF"/>
+        </conditionalStyle>
+    </style>
+    <parameter name="payer" class="java.lang.String"/>
+    <parameter name="payer_accno" class="java.lang.String"/>
+    <parameter name="payer_bank" class="java.lang.String"/>
+    <parameter name="beneficiary" class="java.lang.String"/>
+    <parameter name="beneficiary_acc_no" class="java.lang.String"/>
+    <parameter name="beneficiary_bank" class="java.lang.String"/>
+    <parameter name="description" class="java.lang.String"/>
+    <parameter name="ref_no" class="java.lang.String"/>
+    <parameter name="date_of_transmission" class="java.util.Date"/>
+    <parameter name="amount" class="java.lang.Double"/>
+    <parameter name="imagesDir" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="109" splitType="Stretch">
+            <image>
+                <reportElement x="413" y="10" width="140" height="74" uuid="651ccc4b-e999-40fe-bcbf-1f25bcfc98af"/>
+                <imageExpression><![CDATA[$P{imagesDir}]]></imageExpression>
+            </image>
+            <frame>
+                <reportElement mode="Opaque" x="0" y="0" width="413" height="72" backcolor="#FFFFFF"
+                               uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a"/>
+                <staticText>
+                    <reportElement style="Title" x="30" y="32" width="383" height="40" forecolor="#080808"
+                                   uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21"/>
+                    <textElement verticalAlignment="Middle">
+                        <font fontName="SansSerif" size="25" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[NIBSS SETTLEMENT REPORT]]></text>
+                </staticText>
+            </frame>
+            <frame>
+                <reportElement mode="Opaque" x="0" y="77" width="553" height="32" forecolor="#000000"
+                               backcolor="#E84441" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+                <staticText>
+                    <reportElement mode="Transparent" x="10" y="1" width="543" height="30" forecolor="#FFFFFF"
+                                   uuid="f6ac0555-11dc-44cc-a53c-3db64a143a92"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="22" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Proof of Payment]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="450" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="10" y="3" width="534" height="444" forecolor="#000000"
+                               backcolor="#FFFFFF" uuid="97475f19-8316-4302-a611-d6971860685c"/>
+                <staticText>
+                    <reportElement x="77" y="10" width="117" height="20" uuid="27a6646f-e237-4058-abd2-ab9495015dc2"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Payer Acc. Number]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="50" width="117" height="20" uuid="ba4700c6-997f-48a0-a584-7f338dba1a7a"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Payer]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="246" y="50" width="210" height="20" uuid="d5a4cadd-db56-4af5-8bdb-b1e378d5a8bf"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{payer}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="77" y="410" width="117" height="20" uuid="fcf6012b-9cbc-483f-b43f-c40e50e2fe25"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Status]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="370" width="117" height="20" uuid="7b4c5b90-c1cc-4b91-9260-97e4d1fe2a37"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Amount]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="330" width="117" height="20" uuid="5b933df5-8c6f-410a-bee4-c8477e658262"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Value Date]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="290" width="117" height="20" uuid="c919b216-1408-4da1-b9c0-b51a8e69772b"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Reference Number]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="250" width="117" height="20" uuid="f25a4dbf-7ffb-4d9e-bf3c-20cb241e4b56"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Description]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="210" width="117" height="20" uuid="881c9109-4250-41d7-9d57-a33381aca89f"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Beneficiary Bank]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="170" width="117" height="20" uuid="e22be277-a172-4ff7-896f-313548378eb4"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Beneficiary Account No]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="130" width="117" height="20" uuid="9b081917-7475-447d-a344-b7ab3eba60c5"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Beneficiary]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="77" y="90" width="117" height="20" uuid="40fb474e-2acf-47f9-8d65-6a30d0acf7bb"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font fontName="Arial" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Payer Bank]]></text>
+                </staticText>
+                <textField pattern="#,###.00;#,###.00">
+                    <reportElement x="246" y="370" width="210" height="20" uuid="e49f82db-623b-4fa8-99bb-5792f1bf0cd5"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$P{amount}]]></textFieldExpression>
+                </textField>
+                <textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+                    <reportElement x="246" y="330" width="210" height="20" uuid="bac22db1-29c1-4db9-b10e-10b90acead2c"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{date_of_transmission}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="290" width="210" height="20" uuid="ac44d4a9-4343-4d3a-8b42-6dd99df12e21"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{ref_no}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="250" width="284" height="20" uuid="7a1ffc8c-8a65-4ec2-9a1e-644d70d71151"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{description}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="210" width="210" height="20" uuid="d2715b7b-a3fd-4182-b563-3f70ddcf3cf6"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{beneficiary_bank}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="170" width="210" height="20" uuid="89e58df3-faa3-4f0f-b8d3-8120a3846aae"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{beneficiary_acc_no}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="130" width="284" height="20" uuid="8ea1bf68-7d7e-41de-9c8c-7006ed2e09b8"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{beneficiary}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement x="246" y="90" width="210" height="20" uuid="f5381007-0560-49f6-8356-c34c0492e66b"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{payer_bank}]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="246" y="410" width="264" height="20" uuid="77e842b6-7167-4a19-b45b-a2ec5801b3ae"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <text><![CDATA[SETTLED]]></text>
+                </staticText>
+                <textField>
+                    <reportElement x="246" y="10" width="210" height="20" uuid="a77dd293-fb2e-40c4-a7cc-eb763bd59d16"/>
+                    <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                    <textFieldExpression><![CDATA[$P{payer_accno}]]></textFieldExpression>
+                </textField>
+            </frame>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band height="3" splitType="Stretch">
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="2" y="1" width="555" height="1"
+                               uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#999999"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnFooter>
+    <pageFooter>
+        <band height="25" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#8C8888"
+                               uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+                <textField evaluationTime="Report">
+                    <reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF"
+                                   uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+                </textField>
+                <textField>
+                    <reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF"
+                                   uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+                </textField>
+                <textField pattern="EEEEE dd MMMMM yyyy">
+                    <reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF"
+                                   uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+                    <textElement verticalAlignment="Middle">
+                        <font size="10" isBold="false"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+                </textField>
+                <staticText>
+                    <reportElement x="173" y="0" width="213" height="23" forecolor="#FFFFFF" backcolor="#030303"
+                                   uuid="3c2a8de4-eb80-4aa4-a5b6-3427aff8683d"/>
+                    <textElement verticalAlignment="Middle"/>
+                    <text><![CDATA[(c) Nigeria Inter-Bank Settlement Systems Plc 2021]]></text>
+                </staticText>
+            </frame>
+        </band>
+    </pageFooter>
+    <summary>
+        <band splitType="Stretch"/>
+    </summary>
+</jasperReport>

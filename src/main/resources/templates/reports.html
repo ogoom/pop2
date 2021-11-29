@@ -1,0 +1,135 @@
+<!-- Navigation -->
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring Boot Thymeleaf Application - Bootstrap Table</title>
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/style.css" rel="stylesheet"/>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div class="container">
+    <nav class="navbar  bg-dark navbar-expand-lg fixed-top navbar-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proof of Payment Report</a>
+            <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-target="#navbarResponsive"
+                    data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/report">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <form class="d-flex form-inline ml-auto rounded">
+                    <input aria-label="Search" class="form-control mr-sm-2" placeholder="Search" type="search">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 mt-5 mb-5">
+            <h2>OUTWARD ITEMS DETAIL REPORT</h2>
+            <div th:switch="${reports}" xmlns:th="http://www.w3.org/1999/xhtml">
+                <h2 th:case="null">No Reports yet!</h2>
+                <div th:case="*">
+
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>TDate</th>
+                            <th>DraweeBank</th>
+                            <th>SeqNo</th>
+                            <th>SerialNo</th>
+                            <th>Amount</th>
+                            <th>ReceivingAccountNo</th>
+                            <th>ReceivingName</th>
+                            <th>PresentingAccountNo</th>
+                            <th>PresentingAccountName</th>
+                            <th>TransDetails</th>
+                            <th>PresentingBank</th>
+                            <th>Window</th>
+                            <th>Export</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="report : ${reports.page}">
+                            <td th:text="${#dates.format(new java.util.Date(report.tDate), 'dd/MM/yyyy')}"></td>
+                            <td th:text="${report.draweeBank}"></td>
+                            <td th:text="${report.seqNo}"></td>
+                            <td th:text="${report.serialNo}"></td>
+                            <td th:text="${#numbers.formatDecimal(report.amount, 0, 'COMMA', 2, 'POINT')}"></td>
+                            <td th:text="${report.receivingAccountNo}"></td>
+                            <td th:text="${report.receivingName}"></td>
+                            <td th:text="${report.presentingAccountNo}"></td>
+                            <td th:text="${report.presentingAccountName}"></td>
+                            <td th:text="${report.transDetails}"></td>
+                            <td th:text="${report.presentingBank}"></td>
+                            <td th:text="${report.window}"></td>
+                            <td><a th:href="@{/create_report/{id}(id=${report.id})}">Print</a></td>
+                            <!--                <td><a th:href="@{/delete/{id}(id=${report.id})}">Delete</a></td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <nav aria-label="Page navigation" class="paging">
+                        <ul class="pagination" th:if="${reports.page.totalPages > 1}">
+                            <li class="page-item" th:classappend="${!reports.paging.isPrevEnabled()? 'disabled' : ''}">
+                                <a class="page-link" tabindex="-1"
+                                   th:href="@{/report(pageNumber=${reports.paging.pageNumber - 1})}">Previous</a>
+                            </li>
+                            <th:block th:each="item : ${reports.paging.getItems()}">
+                                <li class="page-item"
+                                    th:classappend="${item.index == reports.paging.pageNumber? 'active' : ''}"
+                                    th:if="${item.pageItemType.name() == 'PAGE'}">
+                                    <a class="page-link" th:href="@{/report(pageNumber=${item.index})}"
+                                       th:text="${item.index}"></a>
+                                </li>
+                                <li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+                                    <a class="page-link" href="#">...</a>
+                                </li>
+                            </th:block>
+                            <li class="page-item" th:classappend="${!reports.paging.isNextEnabled()? 'disabled' : ''}">
+                                <a class="page-link" th:href="@{/report(pageNumber=${reports.paging.pageNumber + 1})}">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+                <p><a href="/signup">Add a new user</a></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="/webjars/popper.js/umd/popper.min.js"></script>
+<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
