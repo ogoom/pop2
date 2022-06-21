@@ -1,26 +1,170 @@
-<div th:switch="${users}" xmlns:th="http://www.w3.org/1999/xhtml">
-    <h2 th:case="null">No users yet!</h2>
-    <div th:case="*">
-        <h2>Users</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Edit</th>
-                <th>Delete</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.email}"></td>
-                <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <p><a href="/signup">Add a new user</a></p>
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>NIBSS SETTLEMENT REPORT APPLICATION - ZENITH PENSIONS</title>
+    <link href="/pop/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="/pop/webjars/jquery/jquery.min.js"></script>
+    <script src="/pop/webjars/popper.js/umd/popper.min.js"></script>
+    <script src="/pop/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/pop/js/moment.js"></script>
+    <script src="/pop/js/datatables.js"></script>
+    <script src="/pop/js/datetime-moment.js"></script>
+    <link href="/pop/css/style.css" rel="stylesheet"/>
+    <link href="/pop/css/datatables.css" rel="stylesheet"/>
+    <link href="/pop/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="/pop/img/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/pop/img/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="/site.webmanifest" rel="manifest">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div class="container">
+    <nav class="navbar  bg-dark navbar-expand-lg fixed-top navbar-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proof of Payment Report</a>
+            <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-target="#navbarResponsive"
+                    data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/pop">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pop/upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pop">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
 </div>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 mt-5 mb-5">
+            <h2>NIBSS SETTLEMENT REPORT</h2>
+            <!-- -->
+
+            <table class="table table-striped table-bordered table-hover" id="report">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>TDate</th>
+                    <th>DraweeBank</th>
+                    <th>SeqNo</th>
+                    <th>SerialNo</th>
+                    <th>Amount</th>
+                    <th>ReceivingAccountNo</th>
+                    <th>ReceivingName</th>
+                    <th>PresentingAccountNo</th>
+                    <th>PresentingAccountName</th>
+                    <th>TransDetails</th>
+                    <th>PresentingBank</th>
+                    <th>Window</th>
+                </tr>
+                </thead>
+                <tfoot class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>TDate</th>
+                    <th>DraweeBank</th>
+                    <th>SeqNo</th>
+                    <th>SerialNo</th>
+                    <th>₦Amount</th>
+                    <th>ReceivingAccountNo</th>
+                    <th>ReceivingName</th>
+                    <th>PresentingAccountNo</th>
+                    <th>PresentingAccountName</th>
+                    <th>TransDetails</th>
+                    <th>PresentingBank</th>
+                    <th>Window</th>
+                </tr>
+                </tfoot>
+
+            </table>
+
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" src="js/jquery.spring-friendly.js"></script>-->
+<script>
+    $(document).ready(function () {
+        var table= $('#report').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/pop/reports",
+            "type": "POST",
+            "dataType": "json",
+            "contentType": "application/json",
+            "data": function (d) {
+                return JSON.stringify(d);
+            }
+        },
+        "columnDefs": [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            },
+            {
+                "targets": [5],
+                "searchable": false
+            },
+            {   "targets":[1], render:function(data){
+                    return moment(data).format('DD/MM/YYYY');
+        }}],
+        "columns": [
+            {"data": "id"},
+            {"data": "tDate"
+            },
+            {"data": "draweeBank"},
+            {"data": "seqNo"},
+            {"data": "serialNo"},
+            {"data": "amount",
+                "render": function(data, type) {
+                    var number = $.fn.dataTable.render.number( ',', '.', 2, '₦'). display(data);
+                    return number;}
+            },
+            {"data": "receivingAccountNo"},
+            {"data": "receivingName"},
+            {"data": "presentingAccountNo"},
+            {"data": "presentingAccountName"},
+            {"data": "transDetails"},
+            {"data": "presentingBank"},
+            {"data": "window"}
+
+        ]
+        });
+
+        $('#report tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        console.log(data.id)
+        var id = data.id
+        alert( 'You clicked on '+id+'\'s row' );
+        document.location.href = '/pop/create_report/' + id
+    } );
+    });
+
+</script>
+<script src="/pop/webjars/popper.js/umd/popper.min.js"></script>
+<script src="/pop/webjars/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

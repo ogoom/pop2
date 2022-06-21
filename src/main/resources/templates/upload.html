@@ -1,0 +1,91 @@
+<!-- Navigation -->
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>NIBSS SETTLEMENT REPORT APPLICATION - ZENITH PENSIONS</title>
+    <script src="/pop/webjars/jquery/jquery.min.js"></script>
+    <link href="/pop/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/pop/css/style.css" rel="stylesheet"/>
+    <link href="/pop/img/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180">
+    <link href="/pop/img/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png">
+    <link href="/pop/img/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png">
+    <link href="/site.webmanifest" rel="manifest">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div class="container">
+    <nav class="navbar  bg-dark navbar-expand-lg fixed-top navbar-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proof of Payment Report</a>
+            <button aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"
+                    data-target="#navbarResponsive"
+                    data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/pop">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pop/upload">Upload</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pop">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mt-5">
+
+            <div th:if="${message}">
+                <h2 th:text="${message}"/>
+            </div>
+
+            <form action="/pop/upload" enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input class="custom-file-input" id="customFile" name="file" type="file">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script src="/pop/webjars/popper.js/umd/popper.min.js"></script>
+<script src="/pop/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+<script type="application/javascript">
+    $('input[type="file"]').change(function(e){
+        var fileName = e.target.files[0].name;
+        $('.custom-file-label').html(fileName);
+    });
+
+</script>
+
+</body>
+</html>

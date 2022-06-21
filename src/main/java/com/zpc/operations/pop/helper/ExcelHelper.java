@@ -41,11 +41,11 @@ public class ExcelHelper {
             while (rows.hasNext()) {
                 Row currentRow = rows.next();
 
-                // skip header
-//                if (rowNumber == 0) {
-//                    rowNumber++;
-//                    continue;
-//                }
+                //skip header
+                if (rowNumber == 0) {
+                    rowNumber++;
+                    continue;
+                }
 
                 Iterator<Cell> cellsInRow = currentRow.iterator();
 
